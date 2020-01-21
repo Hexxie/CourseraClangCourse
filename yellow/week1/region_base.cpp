@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <algorithm>
 
 using namespace std;
 
@@ -15,8 +16,8 @@ struct Region {
   int64_t population;
 };
 
-bool operator==(const Region& lhs, const Region& rhs){
-    return tie(lhs.names, lhs.parent_std_name, lhs.population, lhs.std_name) ==
+bool operator<(const Region& lhs, const Region& rhs){
+    return tie(lhs.names, lhs.parent_std_name, lhs.population, lhs.std_name) <
         tie(rhs.names, rhs.parent_std_name, rhs.population, rhs.std_name);
 }
 
@@ -28,39 +29,12 @@ bool operator==(const Region& lhs, const Region& rhs){
  */
 int FindMaxRepetitionCount(const vector<Region>& regions)
 {
-    vector<int>nr_repetitions; //this could be a map
     int max_repetitions = 0;
-    int repetition = 0;
-
-    if(regions.size() == 0)
+    map<Region, int> region_repetitions;
+    for(auto item : regions)
     {
-        return 0;
+        max_repetitions = max(max_repetitions, ++region_repetitions[item]);
     }
-
-    //Create a vector with repetitions for each member
-    for(int i = 0; i < regions.size(); i++)
-    {
-        repetition = 0;
-        for(int j = i; j < regions.size(); j++)
-        {
-            if(regions[i] == regions[j])
-            {
-                repetition++;
-            }
-        }
-        nr_repetitions.push_back(repetition);
-    }
-
-    //Find max nr of repetitions in the vector with repetitions
-    //use std::max
-    for(auto item : nr_repetitions)
-    {
-        if(item > max_repetitions)
-        {
-            max_repetitions = item;
-        }
-    }
-
     return max_repetitions;
 }
 
