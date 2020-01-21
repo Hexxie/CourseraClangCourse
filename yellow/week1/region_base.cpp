@@ -28,7 +28,7 @@ bool operator==(const Region& lhs, const Region& rhs){
  */
 int FindMaxRepetitionCount(const vector<Region>& regions)
 {
-    vector<int>nr_repetitions;
+    vector<int>nr_repetitions; //this could be a map
     int max_repetitions = 0;
     int repetition = 0;
 
@@ -52,6 +52,7 @@ int FindMaxRepetitionCount(const vector<Region>& regions)
     }
 
     //Find max nr of repetitions in the vector with repetitions
+    //use std::max
     for(auto item : nr_repetitions)
     {
         if(item > max_repetitions)
