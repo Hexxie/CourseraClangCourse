@@ -39,7 +39,7 @@ public:
         TasksInfo updated_tasks, untouched_tasks;
         sort(persons_tasks[person].begin(), persons_tasks[person].end());
 
-        for(auto task : persons_tasks[person])
+        for(TaskStatus& task : persons_tasks[person])
         {
           if((task_count != 0) && (task != TaskStatus::DONE))
           {
@@ -51,6 +51,11 @@ public:
           {
             updateTasksState(untouched_tasks, task, false);
           }
+        }
+
+        for(auto task : persons_tasks[person])
+        {
+          cout<<static_cast<int>(task)<<endl;
         }
 
         mergeStateAfterPerform(updated_tasks, untouched_tasks, person);
@@ -87,7 +92,16 @@ private:
 
   void mergeStateAfterPerform(TasksInfo& update, TasksInfo& untouch, const string& person)
   {
+    TasksInfo& internal_state = persons_tasks_state[person];
+    TaskStatus status = TaskStatus::NEW;
 
+    while(status != TaskStatus::DONE)
+    {
+      internal_state[status] = update.find(status)->second + untouch.find(status)->second;
+      status = static_cast<TaskStatus>(static_cast<int>(status)+1);
+    }
+
+    internal_state.find(status)->second += update.find(status)->second;
   }
 };
 
@@ -118,6 +132,9 @@ int main() {
   PrintTasksInfo(updated_tasks);
   cout << "Untouched Ivan's tasks: ";
   PrintTasksInfo(untouched_tasks);
+
+    cout << "Ivan's tasks: ";
+  PrintTasksInfo(tasks.GetPersonTasksInfo("Ivan"));
 
   tie(updated_tasks, untouched_tasks) =
       tasks.PerformPersonTasks("Ivan", 2);
