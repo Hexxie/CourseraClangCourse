@@ -1,7 +1,21 @@
 #pragma once
 
+enum class Comparison {
+  Less,
+  LessOrEqual,
+  Greater,
+  GreaterOrEqual,
+  Equal,
+  NotEqual
+};
+
+enum class LogicalOperation {
+  Or,
+  And
+};
+
 class Node {
-    virtual string Evaluate() const = 0;
+    virtual function<bool(void)> Evaluate() const = 0;
 };
 
 class EmptyNode : public Node {
@@ -17,5 +31,6 @@ class EventComparisonNode : public Node {
 };
 
 class LogicalOperationNode : public Node {
+    LogicalOperationNode()
 
 };
