@@ -1,6 +1,6 @@
 #pragma once
 
-#include "date.h"
+#include "../date/date.h"
 
 #include <ostream>
 #include <map>
@@ -17,6 +17,19 @@ public:
   int DeleteDate(const Date& date);
   set<string> Find(const Date& date) const;
   void Print(ostream &os) const;
+  string Last(const Date &lastDate) const;
+
+  template <typename Func>
+  int RemoveIf(Func predicate)
+  {
+
+  }
+
+  template <typename Func>
+  vector<string> FindIf(Func predicate)
+  {
+
+  }
 
 private:
   map<Date, set<string>> storage;
