@@ -1,7 +1,7 @@
 SOURCES:= ${wildcard *.cpp}
 OBJECTS:= ${SOURCES:.cpp=.o}
 DEP_FILES:= ${SOURCES:.cpp=.d}
-CCFLAGS:= -std=c++11
+CCFLAGS:= -std=c++17
 
 
 .PHONY: all clean

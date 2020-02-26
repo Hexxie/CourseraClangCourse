@@ -6,6 +6,7 @@
 #include <string>
 #include <map>
 #include <set>
+#include <vector>
 
 using namespace std;
 
@@ -33,6 +34,20 @@ ostream& operator << (ostream& os, const map<K, V>& m) {
     }
     first = false;
     os << kv.first << ": " << kv.second;
+  }
+  return os << "}";
+}
+
+template <class K>
+ostream& operator << (ostream& os, const vector<K>& m) {
+  os << "{";
+  bool first = true;
+  for (const auto& kv : m) {
+    if (!first) {
+      os << ", ";
+    }
+    first = false;
+    os << m;
   }
   return os << "}";
 }

@@ -6,21 +6,23 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <string>
 
 using namespace std;
 
-/*
+
 string ParseEvent(istream& is) {
-  // Реализуйте эту функцию
+  string result;
+  getline(is >> ws, result);
+  return result;
 }
 
-*/
 
 void TestAll();
 
 int main() {
   TestAll();
-/*
+
   Database db;
 
   for (string line; getline(cin, line); ) {
@@ -64,11 +66,11 @@ int main() {
       throw logic_error("Unknown command: " + command);
     }
   }
-*/
+
   return 0;
 }
 
-/*
+
 
 void TestParseEvent() {
   {
@@ -87,10 +89,10 @@ void TestParseEvent() {
     AssertEqual(events, vector<string>{"first event  ", "second event"}, "Parse multiple events");
   }
 }
-*/
+
 
 void TestAll() {
   TestRunner tr;
-  //tr.RunTest(TestParseEvent, "TestParseEvent");
+  tr.RunTest(TestParseEvent, "TestParseEvent");
   tr.RunTest(TestParseCondition, "TestParseCondition");
 }

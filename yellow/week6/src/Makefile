@@ -15,7 +15,7 @@ OBJECTS:= condition_parser/condition_parser.o \
 		../include/test_runner.o \
 		main.o
 
-CCFLAGS:= -std=c++11
+CCFLAGS:= -std=c++17
 
 
 .PHONY: all clean yellow_db
