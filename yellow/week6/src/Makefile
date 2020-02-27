@@ -9,6 +9,7 @@ SUBDIRS:= . condition_parser \
 OBJECTS:= condition_parser/condition_parser.o \
 		condition_parser/condition_parser_test.o \
 		database/database.o \
+		database/database_test.o \
 		date/date.o \
 		node/node.o \
 		token/token.o \
@@ -20,7 +21,7 @@ CCFLAGS:= -std=c++17
 
 .PHONY: all clean yellow_db
 
-all: yellow_db
+all: clean yellow_db
 
 yellow_db: $(OBJECTS)
 	$(MAKE) $(OBJECTS)

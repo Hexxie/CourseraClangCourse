@@ -22,6 +22,8 @@ bool DateComparisonNode::Evaluate(const Date& date, const string& event) const
     } else if (cmp_ == Comparison::NotEqual) {
         return date != date_;
     }
+
+    return false;
 }
 
 EventComparisonNode::EventComparisonNode (const Comparison& cmp, const string &value) : cmp_(cmp), event_(value) {}
@@ -41,6 +43,8 @@ bool EventComparisonNode::Evaluate(const Date& date, const string& event) const
     } else if (cmp_ == Comparison::NotEqual) {
         return event != event_;
     }
+
+    return false;
 }
 
 LogicalOperationNode::LogicalOperationNode(const LogicalOperation& l_op, const shared_ptr<Node> left, const shared_ptr<Node> right)
@@ -57,4 +61,6 @@ bool LogicalOperationNode::Evaluate(const Date& date, const string& event) const
     } else if (l_op_ == LogicalOperation::Or) {
         return a || b;
     }
+
+    return false;
 }
