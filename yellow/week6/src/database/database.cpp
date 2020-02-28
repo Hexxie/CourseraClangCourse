@@ -3,8 +3,12 @@
 #include <set>
 
 void Database::Add(const Date& date, const string& event) {
-  storage[date].push_back(event);
   storage_unique[date].insert(event);
+  if(storage_unique.at(date).count(event) == 0) {
+    storage[date].push_back(event);
+  }
+
+
 }
 
 void Database::Print(ostream &os) const {
