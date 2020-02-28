@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../date/date.h"
+#include "date.h"
 
 #include <ostream>
 #include <map>
@@ -61,7 +61,7 @@ public:
   }
 
   template <typename Func>
- vector<string> FindIf(Func predicate)
+ vector<string> FindIf(Func predicate) const
   {
      vector<string> found;
 
@@ -82,7 +82,7 @@ public:
         }
       }
     }
-
+    sort(found.begin(), found.end());
     return found;
   }
 
@@ -93,6 +93,3 @@ private:
 
 extern ostream& operator<< (ostream& stream, const pair<const Date, set<string>>& item);
 
-extern void TestLastPrint();
-extern void TestRemoveIf();
-extern void TestFindIf();

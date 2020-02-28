@@ -1,8 +1,8 @@
-#include "database/database.h"
-#include "date/date.h"
-#include "condition_parser/condition_parser.h"
-#include "node/node.h"
-#include "test.h"
+#include "database.h"
+#include "date.h"
+#include "condition_parser.h"
+#include "node.h"
+
 
 #include <iostream>
 #include <stdexcept>
@@ -17,11 +17,7 @@ string ParseEvent(istream& is) {
   return result;
 }
 
-
-void TestAll();
-
 int main() {
-  TestAll();
 
   Database db;
 
@@ -76,41 +72,3 @@ int main() {
   return 0;
 }
 
-
-
-void TestParseEvent() {
-  {
-    istringstream is("event");
-    AssertEqual(ParseEvent(is), "event", "Parse event without leading spaces");
-  }
-  {
-    istringstream is("   sport event ");
-    AssertEqual(ParseEvent(is), "sport event ", "Parse event with leading spaces");
-  }
-  {
-    istringstream is("  first event  \n  second event");
-    vector<string> events;
-    events.push_back(ParseEvent(is));
-    events.push_back(ParseEvent(is));
-    AssertEqual(events, vector<string>{"first event  ", "second event"}, "Parse multiple events");
-  }
-}
-
-
-void TestAll() {
-  TestRunner tr;
-  tr.RunTest(TestParseEvent, "TestParseEvent");
-  tr.RunTest(TestParseCondition, "TestParseCondition");
-  tr.RunTest(TestLastPrint, "TestLastPrint");
-  tr.RunTest(TestRemoveIf, "TestRemoveIf");
-  tr.RunTest(TestFindIf, "TestFindIf");
-
-  tr.RunTest(TestEmptyNode, "Тест 2 из Coursera");
-  tr.RunTest(TestDbAdd, "Тест 3(1) из Coursera");
-  tr.RunTest(TestDbFind, "Тест 3(2) из Coursera");
-  tr.RunTest(TestDbLast, "Тест 3(3) из Coursera");
-  tr.RunTest(TestDbRemoveIf, "Тест 3(4) из Coursera");
-  tr.RunTest(TestInsertionOrder, "Тест на порядок вывода");
-  tr.RunTest(TestsMyCustom, "Мои тесты");
-  tr.RunTest(TestDatabase, "Тест базы данных с GitHub");
-}
